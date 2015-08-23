@@ -27,6 +27,7 @@ const char* angelic_buffer_cstr(angelic_buffer* ib);
 uint8_t angelic_buffer_getc(angelic_buffer* ib, size_t index);
 int angelic_buffer_putf(angelic_buffer* ob, const FILE* file);
 int angelic_buffer_starts_with(angelic_buffer* b1, angelic_buffer* b2);
+int angelic_buffer_starts_with_str(angelic_buffer* b1, const char* str);
 int angelic_buffer_equals(angelic_buffer* b1, angelic_buffer* b2);
 void angelic_buffer_free(angelic_buffer* ib);
 void angelic_buffer_grow(angelic_buffer* ib, size_t size);

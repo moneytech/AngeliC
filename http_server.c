@@ -72,6 +72,15 @@ angelic_write_response(int client, int status, const char* title){
 
 static void
 process(int client, angelic_http_server* server){
+    angelic_http_request* request = angelic_http_request_malloc();
+
+    char buffer[1025];
+    ssize_t len;
+    while((len = read(client, buffer, 1024)) > 0){
+        buffer[1025] = '\0';
+        fprintf(stdout, "(%d)\n%s\n", (int) len, buffer);
+    }
+
     angelic_buffer* request_route = angelic_buffer_wrap("/");
     for(size_t i = 0; i < server->routers_size; i++){
         angelic_route* route = angelic_router_find(server->routers[i], request_route);

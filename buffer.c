@@ -88,7 +88,21 @@ angelic_buffer_starts_with(angelic_buffer* b1, angelic_buffer* b2){
     if(b1->size >= b2->size){
         for(size_t i = 0; i < b2->size; i++){
             if(b1->data[i] != b2->data[i]){
-                fprintf(stdout, "%c != %c\n", b1->data[i], b2->data[i]);
+                return 0;
+            }
+        }
+
+        return 1;
+    }
+
+    return 0;
+}
+
+int
+angelic_buffer_starts_with_str(angelic_buffer* ib, const char* str){
+    if(ib->size >= strlen(str)){
+        for(size_t i = 0; i < ib->size; i++){
+            if(ib->data[i] != str[i]){
                 return 0;
             }
         }

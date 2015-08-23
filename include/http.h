@@ -36,11 +36,26 @@ angelic_buffer* angelic_http_response_cstr(angelic_http_response* response);
 struct angelic_http_request{
     angelic_http_header* headers[100];
     size_t headers_len;
+    angelic_buffer* method;
+    angelic_buffer* route;
+    angelic_buffer* body;
 };
 
 typedef struct angelic_http_request angelic_http_request;
 
 angelic_http_request* angelic_http_request_malloc() __attribute__((malloc));
+void angelic_http_request_add_header(angelic_http_request* request, angelic_http_header* header);
 void angelic_http_request_free(angelic_http_request* request);
+
+struct angelic_http_request_parser{
+    size_t pos;
+    angelic_buffer* content;
+};
+
+typedef struct angelic_http_request_parser angelic_http_request_parser;
+
+angelic_http_request_parser* angelic_http_request_parser_malloc(angelic_buffer* ib) __attribute__((malloc));
+angelic_http_request* angelic_http_request_parser_parse(angelic_http_request_parser* parser);
+void angelic_http_request_parser_free(angelic_http_request_parser* parser);
 
 #endif
